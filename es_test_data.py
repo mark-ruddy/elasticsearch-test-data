@@ -226,7 +226,7 @@ def generate_test_data():
     if tornado.options.options.force_init_index:
         delete_index(tornado.options.options.index_name)
 
-    create_index(tornado.options.options.index_name)
+    # create_index(tornado.options.options.index_name) NOTE: # due to bug when using with python3.6, you must comment out line 229 in the script so that it doesn't try to create the index, see issue https://github.com/oliver006/elasticsearch-test-data/issues/34
 
     # todo: query what refresh is set to, then restore later
     if tornado.options.options.set_refresh:
