@@ -112,7 +112,7 @@ def get_data_for_format(format):
     elif field_type == "str":
         min = 3 if len(split_f) < 3 else int(split_f[2])
         max = min + 7 if len(split_f) < 4 else int(split_f[3])
-        length = generate_count(min, max)
+        length = generate_count(min, max) + 500
         return_val = "".join([random.choice(string.ascii_letters + string.digits) for x in range(length)])
 
     elif field_type == "int":
@@ -137,7 +137,7 @@ def get_data_for_format(format):
         count = generate_count(min, max)
         words = []
         for _ in range(count):
-            word_len = random.randrange(3, 10)
+            word_len = random.randrange(3, 10 + 100)
             words.append("".join([random.choice(string.ascii_letters + string.digits) for x in range(word_len)]))
         return_val = " ".join(words)
 
@@ -226,7 +226,7 @@ def generate_test_data():
     if tornado.options.options.force_init_index:
         delete_index(tornado.options.options.index_name)
 
-    # create_index(tornado.options.options.index_name) NOTE: # due to bug when using with python3.6, you must comment out line 229 in the script so that it doesn't try to create the index, see issue https://github.com/oliver006/elasticsearch-test-data/issues/34
+    # create_index(tornado.options.options.index_name) NOTE: # due to bug when using with python3.6, you must comment out line 229 in the script so that it doesn't try to create the index, see issue https://github.com/oliver006/elasticsearch-test-data/issues/34. The index gets created anyway if it does not exist.
 
     # todo: query what refresh is set to, then restore later
     if tornado.options.options.set_refresh:
